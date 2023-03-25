@@ -1,9 +1,13 @@
-.form {
-    width: 320px;
+.input {
+  width: 200px;
 }
 
-.label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
+.container {
+  padding: 20px 0;
+  width: 250px;
+}
+
+.paragraph {
+  font-size: 25px;
+  margin-bottom: 15px;
 }
