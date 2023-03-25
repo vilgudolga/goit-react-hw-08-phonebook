@@ -5,7 +5,7 @@ import { Layout } from './Layout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from 'redux/auth/operations';
-import { useAuth } from 'hooks';
+import { useAuth } from 'hooks/useAuth';
 
 const Home = lazy(() => import('../pages/Home'));
 const Register = lazy(() => import('../pages/Register'));
@@ -24,31 +24,31 @@ export const App = () => {
     <b>Refreshing user...</b>
   ) : (
     <Routes>
-      <Route path="/goit-react-hw-08-phonebook" element={<Layout />}>
+      <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route
-          path="/goit-react-hw-08-phonebook/register"
+          path="register"
           element={
             <RestrictedRoute
-              redirectTo="/goit-react-hw-08-phonebook/phonebook"
+              redirectTo="/contacts"
               component={<Register />}
             />
           }
         />
         <Route
-          path="/goit-react-hw-08-phonebook/login"
+          path="/login"
           element={
             <RestrictedRoute
-              redirectTo="/goit-react-hw-08-phonebook/phonebook"
+              redirectTo="/contacts"
               component={<Login />}
             />
           }
         />
         <Route
-          path="/goit-react-hw-08-phonebook/phonebook"
+          path="contacts"
           element={
             <PrivateRoute
-              redirectTo="/goit-react-hw-08-phonebook/login"
+              redirectTo="/login"
               component={<Contacts />}
             />
           }
