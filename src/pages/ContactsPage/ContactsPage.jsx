@@ -1,7 +1,7 @@
-import { ContactForm } from 'components/ContactForm';
-import { ContactList } from 'components/ContactList';
-import { Filter } from 'components/Filter';
-import { Loader } from 'components/Loader';
+import { ContactForm } from 'components/ContactForm/ContactForm';
+import { ContactList } from 'components/ContactList/ContactList';
+import { Filter } from 'components/Filter/Filter';
+import { Loader } from 'components/Loader/Loader';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectError, selectIsLoading } from 'redux/contacts/selectors';

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Loader } from 'components/Loader';
-import { Navigation } from 'components/Navigation';
+import { Loader } from 'components/Loader/Loader';
+import { Navigation } from 'components/Navigation/Navigation';
 
 const Layout = () => {
   return (

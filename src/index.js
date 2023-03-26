@@ -5,21 +5,17 @@ import { App } from 'components/App';
 import './index.css';
 import { Provider } from 'react-redux';
 import { store, persistor } from './redux/store';
-import { BrowserRouter, RouterProvider } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
-import { createBrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/goit-react-hw-08-phonebook">
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <App />
-        </PersistGate>
-      </Provider>
-    </BrowserRouter>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
-createBrowserRouter(RouterProvider, {
-  basename: "/goit-react-hw-08-phonebook",
-});

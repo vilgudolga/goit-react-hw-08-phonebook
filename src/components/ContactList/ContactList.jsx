@@ -1,46 +1,18 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectContacts,
-  selectFilteredContacts,
-} from 'redux/contact/selectors.js';
-import { deleteContact } from 'redux/contact/operations';
-
-import PropTypes from 'prop-types';
 import styles from './ContactList.module.css';
+import { Contact } from 'components/Contact/Contact';
+import { useSelector } from 'react-redux';
+import { selectVisibleItems } from 'redux/contacts/selectors';
 
 export const ContactList = () => {
-  const contacts = useSelector(selectContacts);
-  const dispatch = useDispatch();
-
-  const filteredContacts = useSelector(selectFilteredContacts);
+  const visibleItems = useSelector(selectVisibleItems);
 
   return (
-    <ul className={styles.list}>
-      {contacts.items.length
-        ? filteredContacts.map(contact => (
-            <li className={styles.text} key={contact.id}>
-              {contact.name} {contact.number}
-              <button
-                className={styles.button}
-                onClick={() => dispatch(deleteContact(contact.id))}
-              >
-                Delete
-              </button>
-            </li>
-          ))
-        : 'No contacts'}
+    <ul className="list-unstyled py-4">
+      {visibleItems.map(contact => (
+        <li key={contact.id} className={styles.item}>
+          <Contact contact={contact} />
+        </li>
+      ))}
     </ul>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  deleteContact: PropTypes.func,
 };

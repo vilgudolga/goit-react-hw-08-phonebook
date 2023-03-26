@@ -1,18 +1,27 @@
-import { useDispatch } from 'react-redux';
-import { logOut } from 'redux/auth/operations';
-import { useAuth } from 'hooks';
-import styles from './UserMenu.module.css';
+import { Button, OverlayTrigger, Popover } from 'react-bootstrap';
+import { nanoid } from 'nanoid';
+import { UserPopover } from 'components/UserPopover/UserPopover';
+import { useAuth } from 'hooks/useAuth';
+
+const popoverId = nanoid(5);
+
+const popover = (
+  <Popover id={popoverId}>
+    <Popover.Header>User Menu</Popover.Header>
+    <Popover.Body>
+      <UserPopover />
+    </Popover.Body>
+  </Popover>
+);
 
 export const UserMenu = () => {
-  const dispatch = useDispatch();
   const { user } = useAuth();
 
+  if (!user) return;
+
   return (
-    <div className={styles.wrapper}>
-      <p className={styles.username}>Welcome, {user.name}</p>
-      <button type="button" onClick={() => dispatch(logOut())}>
-        Logout
-      </button>
-    </div>
+    <OverlayTrigger trigger="click" placement="bottom" overlay={popover}>
+      <Button variant="secondary">Welcome '{user.name}'</Button>
+    </OverlayTrigger>
   );
 };

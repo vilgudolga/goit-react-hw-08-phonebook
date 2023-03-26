@@ -1,20 +1,37 @@
-import { NavLink } from 'react-router-dom';
+import { Container, Button, Navbar } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 import { useAuth } from 'hooks/useAuth';
-import styles from './Navigation.module.css';
+import { UserMenu } from 'components/UserMenu/UserMenu';
 
 export const Navigation = () => {
   const { isLoggedIn } = useAuth();
 
   return (
-    <nav>
-      <NavLink className={styles.link} to="/goit-react-hw-08-phonebook">
-        Home
-      </NavLink>
-      {isLoggedIn && (
-        <NavLink className={styles.link} to="/goit-react-hw-08-phonebook/phonebook">
-          Phonebook
-        </NavLink>
-      )}
-    </nav>
+    <Container>
+      <Navbar className="px-3 py-3" bg="light">
+        <LinkContainer to="/">
+          <Navbar.Brand className="fs-2">Phonebook</Navbar.Brand>
+        </LinkContainer>
+        {isLoggedIn && (
+          <LinkContainer to="contacts">
+            <Button variant="secondary">Contacts</Button>
+          </LinkContainer>
+        )}
+        <Navbar.Collapse className="justify-content-end">
+          {isLoggedIn ? (
+            <UserMenu />
+          ) : (
+            <>
+              <LinkContainer className="me-2" to="register">
+                <Button variant="secondary">Register</Button>
+              </LinkContainer>
+              <LinkContainer to="login">
+                <Button variant="secondary">Login</Button>
+              </LinkContainer>
+            </>
+          )}
+        </Navbar.Collapse>
+      </Navbar>
+    </Container>
   );
 };
